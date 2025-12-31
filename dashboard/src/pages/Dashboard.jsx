@@ -1,4 +1,5 @@
 import StatsCard from "../components/StatsCard";
+import RevenueChart from "../components/RevenueChart";
 
 const statsData = [
 	{
@@ -38,6 +39,7 @@ export default function Dashboard() {
 					/>
 				))}
 			</div>
+			<RevenueChart />
 		</section>
 	);
 }

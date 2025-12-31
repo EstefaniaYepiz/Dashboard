@@ -91,3 +91,16 @@
 .stats-change.negative {
 	color: #ef4444;
 }
+.chart-card {
+	background: #1f2933;
+	border-radius: 12px;
+	padding: 1.5rem;
+	margin-top: 2rem;
+}
+
+.chart-title {
+	margin-bottom: 1rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: white;
+}
