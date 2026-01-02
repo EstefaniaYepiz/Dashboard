@@ -7,7 +7,7 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const dataSets = {
 	7: [
@@ -31,9 +31,32 @@ const dataSets = {
 		{ label: "Mar", revenue: 61000 },
 	],
 };
+function ChartSkeleton() {
+	return (
+		<div className="chart-skeleton">
+			<div className="skeleton-header" />
+			<div className="skeleton-chart" />
+		</div>
+	);
+}
 
 export default function RevenueChart() {
 	const [range, setRange] = useState("30");
+	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		setLoading(true);
+
+		// simulate API call
+		const timer = setTimeout(() => {
+			setData(dataSets[range]);
+			setLoading(false);
+		}, 1200);
+
+		return () => clearTimeout(timer);
+	}, [range]);
+
 	return (
 		<div className="chart-card">
 			<div className="chart-header">
@@ -52,21 +75,25 @@ export default function RevenueChart() {
 				</div>
 			</div>
 
-			<ResponsiveContainer width="100%" height={300}>
-				<LineChart data={dataSets[range]}>
-					<CartesianGrid strokeDasharray="3 3" stroke="#2d3748" />
-					<XAxis dataKey="label" stroke="#9ca3af" />
-					<YAxis stroke="#9ca3af" />
-					<Tooltip />
-					<Line
-						type="monotone"
-						dataKey="revenue"
-						stroke="#3b82f6"
-						strokeWidth={3}
-						dot={{ r: 4 }}
-					/>
-				</LineChart>
-			</ResponsiveContainer>
+			{loading ? (
+				<ChartSkeleton />
+			) : (
+				<ResponsiveContainer width="100%" height={300}>
+					<LineChart data={data}>
+						<CartesianGrid strokeDasharray="3 3" stroke="#2d3748" />
+						<XAxis dataKey="label" stroke="#9ca3af" />
+						<YAxis stroke="#9ca3af" />
+						<Tooltip />
+						<Line
+							type="monotone"
+							dataKey="revenue"
+							stroke="#3b82f6"
+							strokeWidth={3}
+							dot={{ r: 4 }}
+						/>
+					</LineChart>
+				</ResponsiveContainer>
+			)}
 		</div>
 	);
 }
