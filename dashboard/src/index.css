@@ -104,3 +104,30 @@
 	font-weight: 600;
 	color: white;
 }
+.chart-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.range-buttons {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.range-buttons button {
+	background: #111827;
+	color: #9ca3af;
+	border: 1px solid #374151;
+	padding: 0.4rem 0.75rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.85rem;
+}
+
+.range-buttons button.active {
+	background: #2563eb;
+	color: white;
+	border-color: #2563eb;
+}
